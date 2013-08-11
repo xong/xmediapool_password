@@ -21,7 +21,7 @@ if(empty($m) OR !is_object($m))
   break;
 }
 
-echo '<div class="formbox">
+echo '
 <form id="xmediapool-download-form" action="redaxo://REX_ARTICLE_ID" method="post">
   <fieldset>
     <input type="hidden" name="xmediapool_password_filename" value="'.htmlspecialchars($filename).'" />
@@ -60,8 +60,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' OR rex_get('download', 'bool'))
   <strong>Glückwunsch! </strong></p>
   <p>Sie haben sich erfolgreich eingeloggt. Die angeforderte Datei wurde heruntergeladen.</p>
 <script type="text/javascript">
-	document.location.href=("'.rex_geturl('', '', array('xmediapool_password_filename' => $filename, 'xmediapool_password' => rex_request('xmediapool_password'), 'download' => 1), '&').'");
-	</script>';
+(function($)
+{
+  $(document).ready(function()
+  {
+    document.location.href=("'.rex_geturl('', '', array('xmediapool_password_filename' => $filename, 'xmediapool_password' => rex_request('xmediapool_password'), 'download' => 1), '&').'");
+  });
+}(jQuery));
+</script>';
   }
 }
 
@@ -76,6 +82,6 @@ if($showform)
     <p><label for="xmediapool_password">Passwort:</label> <input type="password" id="xmediapool_password" name="xmediapool_password" /></p>
     <input type="submit" value="Datei herunterladen" />
   </fieldset>
-</form></div><?php
+</form><?php
 }
 ?>
