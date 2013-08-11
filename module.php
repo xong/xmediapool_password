@@ -76,9 +76,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' OR rex_get('download', 'bool'))
 if($showform)
 {
 ?>
-    <p>Diese Information ist nur für unsere Händler bestimmt.</p>
-    <p>Wenn Sie Händler sind, geben Sie bitte hier Ihr Passwort ein.</p>
-    
     <p><label for="xmediapool_password">Passwort:</label> <input type="password" id="xmediapool_password" name="xmediapool_password" /></p>
     <input type="submit" value="Datei herunterladen" />
   </fieldset>
