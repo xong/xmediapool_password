@@ -76,5 +76,3 @@ rex_register_extension(
 
 if($REX['REDAXO'])
   $I18N->appendFile($REX['INCLUDE_PATH'].'/addons/'.$myself.'/lang/');
-
-?>

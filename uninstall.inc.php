@@ -6,4 +6,3 @@ if(OOAddon::isActivated('metainfo'))
   a62_delete_field('med_'.$myself.'_password');
 
 $REX['ADDON']['install'][$myself] = 0;
-?>

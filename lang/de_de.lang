@@ -1,5 +1,7 @@
 # addon:xmediapool_password de_de
 
+xmediapool_password_install_error_metainfo_not_activated = Das Metainfo-Addon muss installiert und aktiviert sein.
+
 xmediapool_password_download_form_article_id = Artikel-ID des Artikels, der das Downloadformular enthält
 xmediapool_password_config_saved = Konfiguration wurde aktualisiert!
 xmediapool_password_config_not_saved = Konfiguration konnte nicht gespeichert werden!

@@ -69,5 +69,3 @@ echo '
   ';
 
 include $REX["INCLUDE_PATH"]."/layout/bottom.php";
-
-?>
