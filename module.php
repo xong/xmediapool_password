@@ -42,7 +42,7 @@ echo '
 if($_SERVER['REQUEST_METHOD'] == 'POST' OR rex_get('download', 'bool'))
 {
   // Passwort überprüfen
-  if(rex_request('xmediapool_password') != $m->getValue('med_password'))
+  if(rex_request('xmediapool_password') != $m->getValue('med_xmediapool_password_password'))
   {
     echo rex_warning('Das Passwort ist falsch.');
     break;
