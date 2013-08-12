@@ -1,7 +1,6 @@
 <?php
 do {
 
-$showform = true;
 $filename = rex_request('xmediapool_password_filename');
 $filepath = rtrim($REX['MEDIAFOLDER'], '/\\').'/'.$filename;
 
@@ -9,7 +8,6 @@ $filepath = rtrim($REX['MEDIAFOLDER'], '/\\').'/'.$filename;
 if(empty($filename) OR !file_exists($filepath))
 {
   echo rex_warning('Die angegebene Datei wurde nicht gefunden.');
-  $showform = false;
   break;
 }
 
@@ -17,16 +15,28 @@ $m = OOMedia::getMediaByFilename($filename);
 if(empty($m) OR !is_object($m))
 {
   echo rex_warning('Die angegebene Datei wurde nicht gefunden.');
-  $showform = false;
   break;
 }
+
+$title = $m->getTitle();
+if(empty($title))
+  $title = $filename;
+
+$description = $m->getDescription();
+if(OOAddon::isActivated('textile') AND function_exists('rex_a79_textile'))
+  $description = rex_a79_textile($description);
+else
+  $description = nl2br($description);
+
+if(!empty($description))
+  $description = '<div class="description">'.$description.'</div>';
 
 echo '
 <form id="xmediapool-download-form" action="redaxo://REX_ARTICLE_ID" method="post">
   <fieldset>
     <input type="hidden" name="xmediapool_password_filename" value="'.htmlspecialchars($filename).'" />
     
-    <legend>Geschützte Datei herunterladen</legend>';
+    <legend>Download <em>'.$title.'</em></legend>';
 
 // Falls das Formular abgeschickt wurde
 if($_SERVER['REQUEST_METHOD'] == 'POST' OR rex_get('download', 'bool'))
@@ -35,7 +45,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' OR rex_get('download', 'bool'))
   if(rex_request('xmediapool_password') != $m->getValue('med_password'))
   {
     echo rex_warning('Das Passwort ist falsch.');
-    $showform = true;
     break;
   }
   
@@ -70,15 +79,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' OR rex_get('download', 'bool'))
 </script>';
   }
 }
-
-} while(false);
-
-if($showform)
+else
 {
+  echo $description;
+}
 ?>
     <p><label for="xmediapool_password">Passwort:</label> <input type="password" id="xmediapool_password" name="xmediapool_password" /></p>
     <input type="submit" value="Datei herunterladen" />
   </fieldset>
 </form><?php
+} while(false);
 }
 ?>
